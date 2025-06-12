@@ -31,6 +31,8 @@ from visualisations import plot_fairness_comparison_bar_chart, plot_radar_chart,
 RESULTS_DIR = "results"
 os.makedirs(RESULTS_DIR, exist_ok=True)
 
+device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
+
 # Argument parser
 parser = argparse.ArgumentParser(description="Evaluate trained model on a selected dataset")
 parser.add_argument('--dataset', type=str, default='val.csv', help='Name of the evaluation CSV file in /data/')
@@ -131,10 +133,12 @@ ppo_agent_alone = PPOAgent(test_env)
 ppo_agent_nsga2 = PPOAgent(test_env)
 
 # Load models from saved .pth files
-checkpoint_ppo = torch.load("best_ppo_model.pth")
+checkpoint_ppo = torch.load("models/best_ppo_model.pth",map_location=device )
 ppo_agent_alone.policy.load_state_dict(checkpoint_ppo["policy_state_dict"])
-checkpoint_nsga2 = torch.load("best_nsga2_ppo_model.pth")
+ppo_agent_alone.policy.to(device)
+checkpoint_nsga2 = torch.load("models/best_nsga2_ppo_model.pth", map_location=device)
 ppo_agent_nsga2.policy.load_state_dict(checkpoint_nsga2["policy_state_dict"])
+ppo_agent_nsga2.policy.to(device)
 # nsga2_ppo_eval_reward = evaluate_policy(agent=ppo_agent_nsga2, name="NSGA-II + PPO (Test)", env=test_env)
 
 # TESTING EVALUATIONS WITH FAIRNESS
@@ -178,7 +182,7 @@ greedy_qos = greedy_result["qos_violation_rate"]
 greedy_collision = greedy_result["pu_collision_percent"]
 
 # Optional: NSGA-II proxy reward
-pareto_fitness = torch.load("nsga2_pareto_front.pt", weights_only=False)
+pareto_fitness = torch.load("models/nsga2_pareto_front.pt", weights_only=False, map_location=device)
 nsga2_eval_reward = np.mean([f[0] for f in pareto_fitness])
 print(f"[NSGA-II] Average Proxy Reward (SE): {nsga2_eval_reward:.2f}\n")
 # Compute and log hypervolume from final Pareto front
