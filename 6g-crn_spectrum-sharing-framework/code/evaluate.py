@@ -258,7 +258,7 @@ export_allocation_to_csv(alloc_ppo, "alloc_ppo.csv")
 export_allocation_to_csv(alloc_nsga2_ppo, "alloc_nsga2ppo.csv")
 
 # Step 4: Evaluate strategies
-df = pd.read_csv("val_dataset_sinr.csv")
+df = pd.read_csv("data/val_dataset_sinr.csv")
 summary_random = evaluate_strategy("Random", alloc_random, df)
 summary_greedy = evaluate_strategy("Greedy", alloc_greedy, df)
 summary_ppo = evaluate_strategy("PPO", alloc_ppo, df)
