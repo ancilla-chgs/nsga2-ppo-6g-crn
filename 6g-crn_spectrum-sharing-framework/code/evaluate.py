@@ -87,41 +87,6 @@ for seed in seeds:
         "PPO Fairness": ppo_alone_fairness,
         "NSGA2+PPO Fairness": nsga2_ppo_fairness
     })
-'''
-df_seeds = pd.DataFrame(all_results)
-df_seeds.to_csv(os.path.join(RESULTS_DIR, "multi_seed_evaluation.csv"), index=False)
-print("\n Multi-Seed Summary:")
-print(df_seeds.describe())
-
-# === Statistical Significance Testing ===
-ppo_rewards = df_seeds["PPO Reward"]
-nsga2ppo_rewards = df_seeds["NSGA2+PPO Reward"]
-
-t_stat, p_val = ttest_rel(ppo_rewards, nsga2ppo_rewards)
-with open(os.path.join(RESULTS_DIR, "significance_test.txt"), "w") as f:
-    f.write(f"Paired t-test PPO vs NSGA-II + PPO:\n")
-    f.write(f"t-statistic = {t_stat:.4f}, p-value = {p_val:.4f}\n")
-    f.write("Significant\n" if p_val < 0.05 else "Not significant\n")
-'''
-'''
-# === Stability Summary (Mean ± Std) ===
-ppo_reward_mean = df_seeds["PPO Reward"].mean()
-ppo_reward_std = df_seeds["PPO Reward"].std()
-nsga2ppo_reward_mean = df_seeds["NSGA2+PPO Reward"].mean()
-nsga2ppo_reward_std = df_seeds["NSGA2+PPO Reward"].std()
-
-ppo_fairness_mean = df_seeds["PPO Fairness"].mean()
-ppo_fairness_std = df_seeds["PPO Fairness"].std()
-nsga2ppo_fairness_mean = df_seeds["NSGA2+PPO Fairness"].mean()
-nsga2ppo_fairness_std = df_seeds["NSGA2+PPO Fairness"].std()
-
-with open(os.path.join(RESULTS_DIR, "multi_seed_summary.txt"), "w") as f:
-    f.write("Stability Across Seeds (Mean ± Std):\n")
-    f.write(f"PPO Reward: {ppo_reward_mean:.2f} ± {ppo_reward_std:.2f}\n")
-    f.write(f"NSGA-II + PPO Reward: {nsga2ppo_reward_mean:.2f} ± {nsga2ppo_reward_std:.2f}\n")
-    f.write(f"PPO Fairness: {ppo_fairness_mean:.4f} ± {ppo_fairness_std:.4f}\n")
-    f.write(f"NSGA-II + PPO Fairness: {nsga2ppo_fairness_mean:.4f} ± {nsga2ppo_fairness_std:.4f}\n")
-'''
 
 # Load environment for benchmarking
 df = pd.read_csv(dataset_path)
@@ -224,7 +189,7 @@ plot_reward_comparison_bar(labels, values)
 # === spectrum allocation comparisons  ===
 
 print("Generating allocation matrices...")
-time_steps = 10000
+time_steps = len(test_env.episode_time_slots)
 
 # Step 1: Generate allocations
 alloc_random, _ = run_random_policy(test_env, time_steps)
