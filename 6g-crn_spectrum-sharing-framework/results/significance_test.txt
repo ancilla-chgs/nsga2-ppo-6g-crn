@@ -1,0 +1,3 @@
+Paired t-test PPO vs NSGA-II + PPO:
+t-statistic = 1.4560, p-value = 0.2827
+Not significant
