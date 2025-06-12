@@ -31,7 +31,7 @@ from visualisations import plot_fairness_comparison_bar_chart, plot_radar_chart,
 RESULTS_DIR = "results"
 os.makedirs(RESULTS_DIR, exist_ok=True)
 
-device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
+#device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 
 # Argument parser
 parser = argparse.ArgumentParser(description="Evaluate trained model on a selected dataset")
@@ -133,6 +133,7 @@ ppo_agent_alone = PPOAgent(test_env)
 ppo_agent_nsga2 = PPOAgent(test_env)
 
 # Load models from saved .pth files
+device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 checkpoint_ppo = torch.load("models/best_ppo_model.pth",map_location=device )
 ppo_agent_alone.policy.load_state_dict(checkpoint_ppo["policy_state_dict"])
 ppo_agent_alone.policy.to(device)
