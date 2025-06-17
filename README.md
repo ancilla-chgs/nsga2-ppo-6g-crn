@@ -23,7 +23,7 @@ This notebook will:
 
 [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/ancilla-chgs/nsga2-ppo-6g-crn/blob/main/notebooks/evaluate.ipynb)
 
-
+[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/ancilla-chgs/nsga2-ppo-6g-crn/blob/main/notebooks/evaluate_colab.ipynb)
 
  ## Alternatively, follow these manual steps:
 ```python
