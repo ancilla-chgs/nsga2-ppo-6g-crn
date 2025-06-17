@@ -13,20 +13,31 @@ This repository contains the source code, pretrained models, datasets, and evalu
 ## Evaluation Using Google Colab
 
 To evaluate the model easily without setup, open and run the Colab notebook:
-
-[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/ancilla-chgs/nsga2-ppo-6g-crn/blob/main/notebooks/evaluate_colab.ipynb)
-
 This notebook will:
 
 - Install dependencies  
 - Clone this repo  
 - Run the evaluation script on the default validation dataset  
 - Save and display evaluation results
-
 ---
 
-## How to Run Evaluation Locally
+[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/ancilla-chgs/nsga2-ppo-6g-crn/blob/main/notebooks/evaluate_colab.ipynb)
 
+[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/ancilla-chgs/nsga2-ppo-6g-crn/blob/main/notebooks/evaluate_colab.ipynb)
+
+ ## Alternatively, follow these manual steps:
+```python
+# Clone the repo
+!git clone https://github.com/ancilla-chgs/nsga2-ppo-6g-crn.git
+%cd nsga2-ppo-6g-crn
+
+# Install dependencies
+!pip install -r requirements.txt
+
+# Run evaluation
+!python code/evaluate.py --dataset data/val_dataset_sinr.csv
+
+## To run it locally follow these steps: 
 You can also run evaluation locally after cloning the repo:
 
 ```bash
