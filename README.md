@@ -21,8 +21,10 @@ This notebook will:
 - Save and display evaluation results
 ---
 
+## New Notebook to run Evaluation Click on the link 
 [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/ancilla-chgs/nsga2-ppo-6g-crn/blob/main/notebooks/evaluate.ipynb)
 
+## Tested Notedbook with expected results
 [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/ancilla-chgs/nsga2-ppo-6g-crn/blob/main/notebooks/evaluate_colab.ipynb)
 
  ## Alternatively, follow these manual steps:
